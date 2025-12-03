@@ -3,8 +3,8 @@ import { createBrowserRouter } from "react-router";
 import Error from '../Components/Error'
 import Root from '../Layouts/Root';
 import Home from '../Pages/Home';
-import Amne from '../Pages/Amne';
 import Services from '../Pages/Services';
+
 const router =  createBrowserRouter([
   {
     path: "/",
@@ -17,7 +17,8 @@ const router =  createBrowserRouter([
         loader:()=>fetch('data.json')
       },
       {
-        path:"/amne",
+        path:"/services",
+        loader:()=>fetch('data.json'),
         Component:Services
       }
     ]
