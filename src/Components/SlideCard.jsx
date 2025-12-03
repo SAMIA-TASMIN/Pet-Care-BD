@@ -10,7 +10,7 @@ const SlideCard = ({ data }) => {
   return (
 
     <div>
-      <div className="max-w-6xl h-[300px] mx-auto py-10">
+      <div className="max-w-7xl mx-auto py-10">
         <Swiper
           modules={[Pagination, Navigation, Autoplay]}
           slidesPerView={1}
@@ -18,14 +18,14 @@ const SlideCard = ({ data }) => {
           pagination={{ clickable: true }}
           navigation
           autoplay={{ delay: 2500, disableOnInteraction: false }}
-          className="rounded-2xl shadow-xl"
+          className="rounded-2xl shadow-xl  h-[250px] sm:h-[350px] md:h-[450px] lg:h-[550px]"
         >
          {
             data.map(img=> <SwiperSlide>
             <img
               src={img.image}
               alt="Pet Grooming"
-              className="w-full h-64 object-cover rounded-2xl"
+              className="w-full h-full object-cover rounded-2xl"
             />
           </SwiperSlide>)
          }

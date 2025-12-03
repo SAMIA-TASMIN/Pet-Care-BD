@@ -1,6 +1,7 @@
 import React from "react";
 import 'animate.css';
 import { Link } from "react-router";
+import logo from '../assets/petLogo.jpeg'
 const Navbar = () => {
   const links = (
     <>
@@ -9,7 +10,7 @@ const Navbar = () => {
       </li>
 
       <li>
-       <Link to={`/services`}>Services</Link>
+       <Link to={`/amne`}>Services</Link>
       </li>
       <li>
        <Link to={`/profile`}>My Profile</Link>
@@ -44,7 +45,10 @@ const Navbar = () => {
             {links}
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl animate__animated animate__wobble">PetCare BD </a>
+       <div className="flex justify-center items-center">
+        <img className="w-[70px] h-[70px]" src={logo} alt="" />
+         <a className="btn btn-ghost text-xl animate__animated animate__wobble">PetCare BD </a>
+       </div>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1 animate__animated animate__backInDown">{links}</ul>
