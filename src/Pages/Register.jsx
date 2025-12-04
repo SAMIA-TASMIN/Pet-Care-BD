@@ -5,7 +5,11 @@ import { Link } from "react-router";
 const Register = () => {
   const handleRegister = (e) => {
     e.preventDefault();
-    
+    const name = e.target.name.value;
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    const url = e.target.photoURL.value;
+    console.log(name, email, password, url);
   };
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-100 via-indigo-50 to-purple-100 flex items-center justify-center px-4 py-8">
@@ -68,7 +72,6 @@ const Register = () => {
                   type="text"
                   name="photoURL"
                   placeholder="Enter photo URL"
-                
                   className="w-full pl-11 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all"
                 />
               </div>
@@ -92,7 +95,7 @@ const Register = () => {
             </div>
 
             {/* Submit Button */}
-            <button className="w-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-bold py-3 rounded-xl hover:from-blue-600 hover:to-indigo-700 transform hover:scale-[1.02] transition-all shadow-lg">
+            <button className="cursor-pointer w-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-bold py-3 rounded-xl hover:from-blue-600 hover:to-indigo-700 transform hover:scale-[1.02] transition-all shadow-lg">
               Register
             </button>
           </form>
