@@ -1,8 +1,10 @@
-import React from "react";
+import React, { use } from "react";
 import { Mail, Lock, User, Image } from "lucide-react";
 import { Link } from "react-router";
+import { AuthContext } from "../Contexts/AuthContext";
 
 const Register = () => {
+  const { createUser } = use(AuthContext);
   const handleRegister = (e) => {
     e.preventDefault();
     const name = e.target.name.value;
@@ -10,6 +12,18 @@ const Register = () => {
     const password = e.target.password.value;
     const url = e.target.photoURL.value;
     console.log(name, email, password, url);
+
+    createUser(email, password)
+      .then((userCredential) => {
+        // Signed up
+        const user = userCredential.user;
+        console.log(user);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorMessage);
+      });
   };
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-100 via-indigo-50 to-purple-100 flex items-center justify-center px-4 py-8">

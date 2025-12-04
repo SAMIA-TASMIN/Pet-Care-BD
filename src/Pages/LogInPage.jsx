@@ -1,15 +1,27 @@
-import React from "react";
+import React, { use } from "react";
 import { Mail, Lock, User, Image } from "lucide-react";
-import { div } from "framer-motion/client";
 import { Link } from "react-router";
+import { AuthContext } from "../Contexts/AuthContext";
+import toast from "react-hot-toast";
 
 const LogInPage = () => {
+  const { login } = use(AuthContext);
   const handleLogin = (e) => {
     e.preventDefault();
-  
     const email = e.target.email.value;
     const password = e.target.password.value;
-    console.log(email,password);
+
+    login(email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        toast.success("Log In Successful")
+        console.log(user);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorMessage);
+      });
   };
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-100 via-purple-50 to-pink-100 flex items-center justify-center px-4 py-8">
