@@ -21,13 +21,13 @@ const ServiceDetails = () => {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 py-6 px-4 my-10">
       <div className="max-w-4xl mx-auto">
         
-        {/* Main Card - Compact Version */}
+    
         <div className="bg-white rounded-xl shadow-xl overflow-hidden">
           
-          {/* Image and Info Section - Side by Side on Desktop */}
+        
           <div className="grid md:grid-cols-2 gap-0">
             
-            {/* Image */}
+          
             <div className="relative h-64 md:h-full">
               <img 
                 src={image} 
@@ -43,9 +43,9 @@ const ServiceDetails = () => {
               </div>
             </div>
 
-            {/* Content */}
+        
             <div className="p-6">
-              {/* Title & Price */}
+           
               <div className="flex justify-between items-start mb-3">
                 <h1 className="text-2xl font-bold text-gray-900 flex-1">
                   {serviceName}
@@ -55,7 +55,7 @@ const ServiceDetails = () => {
                 </div>
               </div>
 
-              {/* Rating */}
+      
               <div className="flex items-center gap-2 mb-4">
                 <div className="flex items-center gap-1">
                   {[...Array(5)].map((_, i) => (
@@ -68,12 +68,11 @@ const ServiceDetails = () => {
                 <span className="text-sm font-semibold text-gray-700">{rating}</span>
               </div>
 
-              {/* Description */}
               <p className="text-gray-600 text-sm mb-4 line-clamp-3">
                 {description}
               </p>
 
-              {/* Provider Info */}
+            
               <div className="bg-gray-50 rounded-lg p-3 mb-4">
                 <div className="flex items-center gap-2 mb-2">
                   <User className="w-4 h-4 text-indigo-600" />
@@ -85,7 +84,7 @@ const ServiceDetails = () => {
                 </div>
               </div>
 
-              {/* Book Service Form */}
+             
               <div className="border-t pt-4">
                 <h2 className="text-lg font-bold text-gray-900 mb-3">Book Service</h2>
                 <form onSubmit={handleSubmit} className="space-y-3">

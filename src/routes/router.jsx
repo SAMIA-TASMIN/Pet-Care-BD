@@ -1,5 +1,5 @@
 import React from 'react';
-import { createBrowserRouter } from "react-router-dom"; // এটা change করো
+import { createBrowserRouter } from "react-router-dom"; 
 import Error from '../Components/Error'
 import Root from '../Layouts/Root';
 import Home from '../Pages/Home';
@@ -11,16 +11,16 @@ import ServiceDetails from '../Pages/ServiceDetails';
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Root />, // Component এর বদলে element ব্যবহার করো
+    element: <Root />, 
     errorElement: <Error />,
     children: [
       {
         index: true,
         element: <Home />,
-        loader: () => fetch('/data.json') // শুরুতে / দাও
+        loader: () => fetch('/data.json') 
       },
       {
-        path: "services", // শুরুতে / দিও না
+        path: "services", 
         loader: () => fetch('/data.json'),
         element: <Services />
       },

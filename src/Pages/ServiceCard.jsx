@@ -7,22 +7,21 @@ const ServiceCard = ({singleData}) => {
     return (
             <div className="w-full max-w-sm bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition border border-gray-200">
       
-      {/* Image */}
+ 
       <img
         src={image}
         alt={serviceName}
         className="w-full h-48 object-cover"
       />
 
-      {/* Content */}
       <div className="p-4 space-y-3">
         
-        {/* Name */}
+   
         <h2 className="text-xl font-semibold text-gray-800">
           {serviceName}
         </h2>
 
-        {/* Rating */}
+      
        <div className='flex justify-between'>
          <div className="flex items-center gap-1 text-yellow-500 text-sm">
           {/* Stars */}
@@ -46,7 +45,7 @@ const ServiceCard = ({singleData}) => {
 
         {/* Button */}
         <Link to={`/service/${serviceId}`}>
-        <button className="w-full bg-blue-600 text-white py-2 rounded-lg font-medium hover:bg-blue-700 transition">
+        <button className="cursor-pointer w-full bg-blue-600 text-white py-2 rounded-lg font-medium hover:bg-blue-700 transition">
           View Details
         </button>
         </Link>
