@@ -4,6 +4,8 @@ import 'animate.css';
 import { useLoaderData } from 'react-router';
 import SlideCard from '../Components/SlideCard';
 import Services from './Services';
+import Tips from './Tips';
+import Veterian from './Veterian';
 
 
 const Home = () => {
@@ -14,6 +16,8 @@ const Home = () => {
          
             <SlideCard data={data}></SlideCard>
            <Services></Services>
+            <Tips></Tips>
+           <Veterian></Veterian>
             
         </div>
     );
