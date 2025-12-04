@@ -45,7 +45,7 @@ const ServiceCard = ({singleData}) => {
        
 
         {/* Button */}
-        <Link to={`/`}>
+        <Link to={`/service/${serviceId}`}>
         <button className="w-full bg-blue-600 text-white py-2 rounded-lg font-medium hover:bg-blue-700 transition">
           View Details
         </button>

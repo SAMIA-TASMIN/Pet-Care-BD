@@ -1,11 +1,14 @@
 
 import { useLoaderData } from 'react-router';
 import ServiceCard from './ServiceCard';
+import { AuthContext } from '../Contexts/AuthContext';
+import { use } from 'react';
 
 
 const Services = () => {
-    const data = useLoaderData()
-  ;
+
+ 
+    const data = useLoaderData();
   
     return (
    

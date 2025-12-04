@@ -4,19 +4,18 @@ import { Link } from "react-router";
 import logo from '../assets/petLogo.jpeg'
 const Navbar = () => {
   const links = (
-    <>
-      <li>
-        <Link to={`/`}>Home</Link>
-      </li>
-
-      <li>
-       <Link to={`/services`}>Services</Link>
-      </li>
-      <li>
-       <Link to={`/profile`}>My Profile</Link>
-      </li>
-    </>
-  );
+  <>
+    <li>
+      <Link to="/">Home</Link> {/* / দিতে হবে */}
+    </li>
+    <li>
+      <Link to="/services">Services</Link> {/* / দিতে হবে */}
+    </li>
+    <li>
+      <Link to="/profile">My Profile</Link>
+    </li>
+  </>
+);
   return (
     <div className="navbar bg-base-100 shadow-sm">
       <div className="navbar-start">
