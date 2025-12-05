@@ -1,27 +1,42 @@
-import React from "react";
-import 'animate.css';
+import React, { use } from "react";
+import "animate.css";
 import { Link } from "react-router";
-import logo from '../assets/petLogo.jpeg'
+import logo from "../assets/petLogo.jpeg";
+import { AuthContext } from "../Contexts/AuthContext";
+import toast from "react-hot-toast";
 const Navbar = () => {
-  const links = (
-  <>
-    <li>
-      <Link to="/">Home</Link> 
-    </li>
-    <li>
-      <Link to="/services">Services</Link> 
-    </li>
-    <li>
-      <Link to="/profile">My Profile</Link>
-    </li>
-    <li>
-      <Link to="/login">Login</Link>
-    </li>
-    <li>
-      <Link to="/register">Registration</Link>
-    </li>
-  </>
-);
+  const { user, logOut } = use(AuthContext);
+  console.log(user);
+
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {
+        toast.success("Logout SuccessFully");
+      })
+      .catch((error) => {
+        toast.error("got error", error);
+      });
+  };
+
+  const links = 
+    <>
+      <li>
+        <Link to="/">Home</Link>
+      </li>
+      <li>
+        <Link to="/services">Services</Link>
+      </li>
+      <li>
+        <Link to="/profile">My Profile</Link>
+      </li>
+      <li>
+        <Link to="/login">Login</Link>
+      </li>
+      <li>
+        <Link to="/register">Registration</Link>
+      </li>
+    </>
+ 
   return (
     <div className="navbar bg-base-100 shadow-sm">
       <div className="navbar-start">
@@ -50,16 +65,31 @@ const Navbar = () => {
             {links}
           </ul>
         </div>
-       <div className="flex justify-center items-center">
-        <img className="w-[70px] h-[70px]" src={logo} alt="" />
-         <a className="btn btn-ghost text-xl animate__animated animate__wobble">PetCare BD </a>
-       </div>
+        <div className="flex justify-center items-center">
+          <img className="w-[70px] h-[70px]" src={logo} alt="" />
+          <a className="btn btn-ghost text-xl animate__animated animate__wobble">
+            PetCare BD{" "}
+          </a>
+        </div>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1 animate__animated animate__backInDown">{links}</ul>
+        <ul className="menu menu-horizontal px-1 animate__animated animate__backInDown">
+          {links}
+        </ul>
       </div>
       <div className="navbar-end">
-        <a className="btn">Button</a>
+        {user ? (
+          <>
+            <span className="mx-3
+            ">{user?.email || user.displayName}</span>
+            <a onClick={handleLogOut} className="btn">
+              {" "}
+              LogOut
+            </a>
+          </>
+        ) : (
+          <Link to={`/login`}>Log in</Link>
+        )}
       </div>
     </div>
   );

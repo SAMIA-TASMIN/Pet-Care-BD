@@ -1,33 +1,60 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AuthContext } from './AuthContext';
-import {  createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
+import {  createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
 import { auth } from '../firebase/firebase.init';
+
+const provider = new GoogleAuthProvider();
+
 const AuthProvider = ({children}) => {
 
+    const [user,setUser]=useState(null)
+    const [loading,setLoading]=useState(true)
+
+
+    
 
     const createUser =(email,password)=>{
+        setLoading(true)
         return createUserWithEmailAndPassword(auth, email, password)
     }
     
     const login =(email,password)=>{
+        setLoading(true)
         return signInWithEmailAndPassword(auth, email, password)
     }
 
+
+    const logOut =()=>{
+        setLoading(true)
+        return signOut(auth)
+    }
+
+    const googleLogin =()=>{
+        setLoading(true)
+        return signInWithPopup(auth, provider)
+    }
+    
     useEffect(()=>{
         const unSubscribe = onAuthStateChanged(auth,(currentUser)=>{
-            if(currentUser){
-                console.log(currentUser);
-            }
-            else{
-                console.log("error pawa gese");
-            }
+          
+                setUser(currentUser);
+                setLoading(false)
+           
         })
-        return ()=>unSubscribe()
+        return ()=>{
+            unSubscribe()
+        }
     },[])
 
     const information ={
         createUser,
         login,
+        user,
+        setUser,
+        logOut,
+        loading,
+        setLoading,
+        googleLogin
 
     }
     return (

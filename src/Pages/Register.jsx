@@ -1,28 +1,31 @@
 import React, { use } from "react";
 import { Mail, Lock, User, Image } from "lucide-react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../Contexts/AuthContext";
+import toast from "react-hot-toast";
 
 const Register = () => {
   const { createUser } = use(AuthContext);
+
+  const navigate= useNavigate()
   const handleRegister = (e) => {
     e.preventDefault();
     const name = e.target.name.value;
     const email = e.target.email.value;
     const password = e.target.password.value;
     const url = e.target.photoURL.value;
-    console.log(name, email, password, url);
+    
 
     createUser(email, password)
       .then((userCredential) => {
-        // Signed up
         const user = userCredential.user;
-        console.log(user);
+        toast.success("Registration succesfully")
+       
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log(errorMessage);
+        toast.error("Got an error during registration")
       });
   };
   return (

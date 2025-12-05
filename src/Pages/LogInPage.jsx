@@ -1,11 +1,14 @@
 import React, { use } from "react";
 import { Mail, Lock, User, Image } from "lucide-react";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../Contexts/AuthContext";
 import toast from "react-hot-toast";
 
 const LogInPage = () => {
-  const { login } = use(AuthContext);
+  const { login, googleLogin, setUser } = use(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+  console.log(location);
   const handleLogin = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
@@ -14,13 +17,26 @@ const LogInPage = () => {
     login(email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        toast.success("Log In Successful")
-        console.log(user);
+        toast.success("Log In Successful");
+        navigate(location?.state || "/");
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log(errorMessage);
+        toast.error("got an error");
+      });
+  };
+
+  const handleGoogle = () => {
+    googleLogin()
+      .then((res) => {
+        console.log(res.user);
+        toast.success("Login with google");
+        setUser(res.user);
+        navigate(location?.state || "/");
+      })
+      .catch((e) => {
+        toast.error("google log in e somossa kortese");
       });
   };
   return (
@@ -78,7 +94,12 @@ const LogInPage = () => {
               Login
             </button>
           </form>
-
+          <button
+            onClick={handleGoogle}
+            className="my-4 cursor-pointer w-full bg-gradient-to-l from-blue-500 to-orange-200 text-white font-bold py-3 rounded-xl hover:from-indigo-600 hover:to-purple-700 transform hover:scale-[1.02] transition-all shadow-lg"
+          >
+            Login With Google
+          </button>
           {/* Footer */}
           <div className="mt-6 text-center">
             <p className="text-gray-600">
