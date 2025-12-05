@@ -5,9 +5,24 @@ import { AuthContext } from "../Contexts/AuthContext";
 import toast from "react-hot-toast";
 
 const Register = () => {
-  const { createUser } = use(AuthContext);
+  const { createUser ,googleLogin} = use(AuthContext);
 
   const navigate= useNavigate()
+
+
+
+    const handleGoogle = () => {
+    googleLogin()
+      .then((res) => {
+        toast.success("Register with google");
+        navigate(location?.state || "/");
+      })
+      .catch((e) => {
+       
+      });
+  };
+
+
   const handleRegister = (e) => {
     e.preventDefault();
     const name = e.target.name.value;
@@ -15,12 +30,12 @@ const Register = () => {
     const password = e.target.password.value;
     const url = e.target.photoURL.value;
     
-
+  
     createUser(email, password)
       .then((userCredential) => {
         const user = userCredential.user;
         toast.success("Registration succesfully")
-       
+       navigate("/")
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -116,9 +131,15 @@ const Register = () => {
               Register
             </button>
           </form>
-
+                 <button
+            onClick={handleGoogle}
+            className="my-2 cursor-pointer w-full bg-gradient-to-l from-blue-500 to-orange-200 text-white font-bold py-3 rounded-xl hover:from-indigo-600 hover:to-purple-700 transform hover:scale-[1.02] transition-all shadow-lg"
+          >
+            Login With Google
+          </button>
           {/* Footer */}
           <div className="mt-6 text-center">
+            
             <p className="text-gray-600">
               Already have an account?{" "}
               <span className="text-blue-600 font-semibold hover:text-blue-700 cursor-pointer">

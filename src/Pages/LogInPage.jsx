@@ -8,7 +8,7 @@ const LogInPage = () => {
   const { login, googleLogin, setUser } = use(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
-  console.log(location);
+ 
   const handleLogin = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
@@ -30,7 +30,6 @@ const LogInPage = () => {
   const handleGoogle = () => {
     googleLogin()
       .then((res) => {
-        console.log(res.user);
         toast.success("Login with google");
         setUser(res.user);
         navigate(location?.state || "/");
