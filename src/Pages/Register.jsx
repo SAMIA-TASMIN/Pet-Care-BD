@@ -5,11 +5,9 @@ import { AuthContext } from "../Contexts/AuthContext";
 import toast from "react-hot-toast";
 
 const Register = () => {
-  const { createUser ,googleLogin} = use(AuthContext);
+  const { setUser,createUser ,googleLogin} = use(AuthContext);
 
   const navigate= useNavigate()
-
-
 
     const handleGoogle = () => {
     googleLogin()
@@ -34,6 +32,7 @@ const Register = () => {
     createUser(email, password)
       .then((userCredential) => {
         const user = userCredential.user;
+        setUser(user)
         toast.success("Registration succesfully")
        navigate("/")
       })

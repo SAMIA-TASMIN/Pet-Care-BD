@@ -1,4 +1,4 @@
-import  { use } from "react";
+import  { use, useState } from "react";
 import { Mail, Lock, User, Image } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../Contexts/AuthContext";
@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 
 const LogInPage = () => {
   const { login, googleLogin, setUser } = use(AuthContext);
+  const [error,setErro]=useState("")
   const navigate = useNavigate();
   const location = useLocation();
  
@@ -24,6 +25,7 @@ const LogInPage = () => {
         const errorCode = error.code;
         const errorMessage = error.message;
         toast.error("got an error");
+        setErro(errorMessage)
       });
   };
 
@@ -86,6 +88,8 @@ const LogInPage = () => {
                   className="w-full pl-11 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition-all"
                 />
               </div>
+              <div className="text-xs my-1 cursor-pointer"><a>Forget Password ?</a></div>
+              <div className="text-red-400 text-xs my-2">{error} </div>
             </div>
 
             {/* Submit Button */}
