@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 const Navbar = () => {
   const { user, logOut } = use(AuthContext);
   const navigate = useNavigate()
+  console.log(user);
 
   const handleLogOut = () => {
     logOut()
@@ -81,10 +82,9 @@ const Navbar = () => {
       <div className="navbar-end">
         {user ? (
           <>
-            <span className="mx-3
-            ">{user?.photoURL || user.email}
-            
-
+            <span className="mx-3">
+              
+            <img className="w-[50px] h-[50px] cursor-pointer rounded-full " title={user?.displayName} src={user?.photoURL} alt="" />
             </span>
             <a onClick={handleLogOut} className="btn">
               {" "}

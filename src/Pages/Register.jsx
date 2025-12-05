@@ -1,25 +1,23 @@
-import { use } from "react";
+import { use, useState } from "react";
 import { Mail, Lock, User, Image } from "lucide-react";
 import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../Contexts/AuthContext";
 import toast from "react-hot-toast";
 
 const Register = () => {
-  const { setUser,createUser ,googleLogin} = use(AuthContext);
+  const { setUser, createUser, updateUser, googleLogin } = use(AuthContext);
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-  const navigate= useNavigate()
-
-    const handleGoogle = () => {
+  const handleGoogle = () => {
     googleLogin()
       .then((res) => {
         toast.success("Register with google");
+        console.log(res);
         navigate(location?.state || "/");
       })
-      .catch((e) => {
-       
-      });
+      .catch((e) => {});
   };
-
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -27,19 +25,34 @@ const Register = () => {
     const email = e.target.email.value;
     const password = e.target.password.value;
     const url = e.target.photoURL.value;
-    
-  
+
+    const passwordPattern = /^(?=.*[A-Z])(?=.*[a-z]).{6,}$/;
+    if (!passwordPattern.test(password)) {
+      setError("Password Criteria didn't matched");
+      return;
+    }
+
     createUser(email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        setUser(user)
-        toast.success("Registration succesfully")
-       navigate("/")
+        updateUser({ displayName: name ,photoURL:url})
+          .then((res) => {
+            setUser({...user,displayName: name ,photoURL:url});
+            toast.success("Registration succesfully");
+            navigate("/");
+          })
+          .catch((e) => {
+            setError(e);
+          });
+        
+        
+        
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        toast.error("Got an error during registration")
+        setError(errorMessage)
+        toast.error("Got an error during registration");
       });
   };
   return (
@@ -124,13 +137,13 @@ const Register = () => {
                 />
               </div>
             </div>
-
+            <div className="text-xs text-red-300">{error}</div>
             {/* Submit Button */}
             <button className="cursor-pointer w-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-bold py-3 rounded-xl hover:from-blue-600 hover:to-indigo-700 transform hover:scale-[1.02] transition-all shadow-lg">
               Register
             </button>
           </form>
-                 <button
+          <button
             onClick={handleGoogle}
             className="my-2 cursor-pointer w-full bg-gradient-to-l from-blue-500 to-orange-200 text-white font-bold py-3 rounded-xl hover:from-indigo-600 hover:to-purple-700 transform hover:scale-[1.02] transition-all shadow-lg"
           >
@@ -138,7 +151,6 @@ const Register = () => {
           </button>
           {/* Footer */}
           <div className="mt-6 text-center">
-            
             <p className="text-gray-600">
               Already have an account?{" "}
               <span className="text-blue-600 font-semibold hover:text-blue-700 cursor-pointer">
