@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { createBrowserRouter } from "react-router-dom"; 
 import Error from '../Components/Error'
 import Root from '../Layouts/Root';
@@ -8,6 +8,7 @@ import LogInPage from '../Pages/LogInPage';
 import Register from '../Pages/Register';
 import ServiceDetails from '../Pages/ServiceDetails';
 import PrivateRoute from '../PrivateRoute/PrivateRoute';
+import Profile from '../Pages/Profile';
 
 const router = createBrowserRouter([
   {
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
       {
         path: "register",
         element: <Register />
+      },
+      {
+        path:"profile",
+        element:<PrivateRoute><Profile></Profile></PrivateRoute>
       }
     ]
   },

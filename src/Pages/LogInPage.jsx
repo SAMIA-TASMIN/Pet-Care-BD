@@ -1,4 +1,4 @@
-import React, { use } from "react";
+import  { use } from "react";
 import { Mail, Lock, User, Image } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../Contexts/AuthContext";

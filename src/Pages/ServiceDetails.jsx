@@ -1,6 +1,6 @@
 
 import { Link, useLoaderData, useParams } from 'react-router';
-import React from 'react';
+
 import { Star, Mail, User, Calendar, DollarSign, Tag } from 'lucide-react';
 import toast from 'react-hot-toast';
 

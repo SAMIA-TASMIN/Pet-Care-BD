@@ -1,17 +1,19 @@
 import React, { use } from "react";
 import "animate.css";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import logo from "../assets/petLogo.jpeg";
 import { AuthContext } from "../Contexts/AuthContext";
 import toast from "react-hot-toast";
 const Navbar = () => {
   const { user, logOut } = use(AuthContext);
+  const navigate = useNavigate()
   console.log(user);
 
   const handleLogOut = () => {
     logOut()
       .then(() => {
         toast.success("Logout SuccessFully");
+        navigate("/")
       })
       .catch((error) => {
         toast.error("got error", error);
