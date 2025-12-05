@@ -14,11 +14,13 @@ const LogInPage = () => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
+    e.target.reset()
 
     login(email, password)
       .then((userCredential) => {
         const user = userCredential.user;
         toast.success("Log In Successful");
+         
         navigate(location?.state || "/");
       })
       .catch((error) => {

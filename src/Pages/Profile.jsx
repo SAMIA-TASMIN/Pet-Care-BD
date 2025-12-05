@@ -4,7 +4,7 @@ import { Link } from "react-router";
 
 const Profile = () => {
   const { user } = use(AuthContext);
-  console.log(user);
+ 
   return (
     <div className="max-w-sm mx-auto p-4">
       <div

@@ -8,6 +8,7 @@ import Veterian from "./Veterian";
 import PetShopping from "./PetShopping";
 
 const Home = () => {
+  
   const data = useLoaderData();
 
   return (

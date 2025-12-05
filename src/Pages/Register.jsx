@@ -13,7 +13,7 @@ const Register = () => {
     googleLogin()
       .then((res) => {
         toast.success("Register with google");
-        console.log(res);
+        
         navigate(location?.state || "/");
       })
       .catch((e) => {});
@@ -25,6 +25,7 @@ const Register = () => {
     const email = e.target.email.value;
     const password = e.target.password.value;
     const url = e.target.photoURL.value;
+    e.target.reset()
 
     const passwordPattern = /^(?=.*[A-Z])(?=.*[a-z]).{6,}$/;
     if (!passwordPattern.test(password)) {
