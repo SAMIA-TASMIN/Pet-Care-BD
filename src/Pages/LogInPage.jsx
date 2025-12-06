@@ -1,33 +1,34 @@
-import  { use, useState } from "react";
+import { use, useRef, useState } from "react";
 import { Mail, Lock, User, Image } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../Contexts/AuthContext";
 import toast from "react-hot-toast";
 
 const LogInPage = () => {
-  const { login, googleLogin, setUser } = use(AuthContext);
-  const [error,setErro]=useState("")
+  const { login, googleLogin, setUser, resetPassword } = use(AuthContext);
+  const [error, setError] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
- 
+  const emailRef = useRef();
+
   const handleLogin = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
-    e.target.reset()
+    e.target.reset();
 
     login(email, password)
       .then((userCredential) => {
         const user = userCredential.user;
         toast.success("Log In Successful");
-         
+
         navigate(location?.state || "/");
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         toast.error("got an error");
-        setErro(errorMessage)
+        setError(errorMessage);
       });
   };
 
@@ -42,6 +43,23 @@ const LogInPage = () => {
         toast.error("google log in e somossa kortese");
       });
   };
+
+  const handleForgetPassword = () => {
+    const email = emailRef.current.value;
+    resetPassword(email)
+      .then(() => {
+        console.log("password reset");
+        toast.success("password reset email sent,check your email box or spam box");
+
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorMessage);
+        setError(errorMessage);
+      });
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-100 via-purple-50 to-pink-100 flex items-center justify-center px-4 py-8">
       <div className="w-full max-w-md">
@@ -68,6 +86,7 @@ const LogInPage = () => {
                 <input
                   type="email"
                   name="email"
+                  ref={emailRef}
                   placeholder="Enter your email"
                   required
                   className="w-full pl-11 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition-all"
@@ -90,7 +109,12 @@ const LogInPage = () => {
                   className="w-full pl-11 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition-all"
                 />
               </div>
-              <div className="text-xs my-1 cursor-pointer"><a>Forget Password ?</a></div>
+              <div
+                onClick={handleForgetPassword}
+                className="text-xs my-1 cursor-pointer"
+              >
+                <a>Forget Password ?</a>
+              </div>
               <div className="text-red-400 text-xs my-2">{error} </div>
             </div>
 
